@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+body {
+    background-image: url("https://img.freepik.com/free-vector/blue-business-background-with-blocks_53876-100595.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+.certificates-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    /* Styling for each certificate card */
+    .certificates-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+.certificates-card img {
+      height: 260px;
+      width: 340px;
+      margin: 1.4rem;
+      border-radius: 10px;
+      border: 4px solid #00FFFF;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    }
+
+    /* Hover effect for certificate images */
+    .certificates-card img:hover {
+      box-shadow: 0 0 1px 6px #007FFF;
+      transform: scale(1.05); /* Slight zoom effect */
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    /* Close button styling */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #007FFF;
+      text-decoration: none;
+      cursor: pointer;
+    }
+/* body::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar {
+  width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #153055;
+} */
+
+.bg-image {
+    /* background-image: url('https://www.inquisitor.in/img/portfolio1/portfolio-background.png');  */
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.navbar {
+    position: sticky;
+    width: 100%;
+    z-index: 1000;
+    /* background: linear-gradient(to right, rgb(214, 168, 214), white); */
+    background-color: #dcf0f1;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    position: relative;
+    color: #ffffff; /* Link color */
+    font-size: 1.1rem; /* Slightly larger font */
+    transition: color 0.3s;
+}
+.nav-link::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #0ea1a9;
+    width: 0;
+    transition: width 0.3s;
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    z-index: 1;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-link:hover {
+    color: white; /* Change link color on hover */
+}
+
+.center-content {
+    text-align: center;
+    color: black;
+}
+
+h2 {
+    font-size: 3rem;
+    margin: 0; /* Remove default margin */
+}
+
+.btn-download {
+    margin-top: 20px; /* Space between text and button */
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #000000;
+    background-color: #7ee1e6; /* Button background */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for the button */
+}
+.btn-download:hover {
+    background-color: #0ccfda; /* Change background on hover */
+    color: #000000; /* Text color on hover */
+    text-decoration: none;
+            
+}
+
+        /* Responsive styles */
+        /* @media (max-width: 1200px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                padding: 0.5rem;
+            }
+        } */
+.skill-icon {
+    transition: transform 0.3s;
+}
+.skill-image {
+    width: 90px; /* Set a fixed width for the image */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 90px; /* Limit the maximum height */
+    object-fit: contain; /* Ensure the image fits well */
+}
+.skill-icon:hover {
+    transform: scale(1.5); /* Slightly enlarge on hover */
+}
+
+@media (max-width: 768px) {
+    .skill-icon {
+        font-size: 1.0em; /* Smaller icons on mobile */
+    }
+}
+hr {
+    border: none; /* Remove default border */
+    height: 1px; /* Set height */
+    background-color: #00000090; /* Line color */
+    margin: 20px 0; /* Spacing above and below */
+}
+#education {
+    background-color: transparent; /* Background color */
+}
+
+.education {
+    background-color: #dcf0f1; /* Card background color */
+    border: 1px solid #000000a5; /* Border color */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effects */
+}
+
+.education:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.826); /* Shadow effect on hover */
+}
+
+.fs-3 {
+    color: #343a40; /* Header color */
+}
+
+.fs-5 {
+    color: #495057; /* Text color */
+}
+
+@media (max-width: 768px) {
+    .education {
+        margin-bottom: 20px; /* Space between cards on smaller screens */
+        }
+    }
+.card-container {
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+}
+
+.card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without empty space */
+    border-radius: 8px 8px 0 0; /* Rounds the top corners */
+}
+
+.card-container:hover .card {
+    transform: rotateY(180deg);
+}
+.card {
+    transition: transform 1.0s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #56d2d8;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: #56d2d8;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-primary {
+    border-radius: 0.5rem;
+    padding: 10px;
+    font-size: 16px;
+}
+
+form {
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+form:hover {
+    transform: scale(1.02);
+}
+
+section {
+    padding: 50px 0;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.shadow {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+footer {
+    background-color: #8ee1e6;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer .social-icons a {
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+footer .social-icons a:hover {
+    color: none; 
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    footer .social-icons {
+        margin-top: 10px;
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+    </style>
+</head>
+<body>
+    <!-- -------Navbar Bar Start------- -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand text-black" href="#">Raja Balaji Ayyanar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#education">Education</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#certificates">Certificates</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link text-black px-3" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- -------Navbar Bar End------- -->
+    <!-- -------Name Start------- -->
+    <div class="bg-image">
+        <div class="center-content">
+            <h2>Hello I’m Raja Balaji</h2>
+            <h1 id="name">Your Name Here</h1><br>
+            <a href="./Balaji CV (1).pdf" class="btn btn-download" download>Download CV</a>
+        </div>
+    </div>
+    <!-- -------Name End------- -->
+    <hr>
+    <!-- -------About Us Start------- -->
+    
+    <section id="about" style="padding: 100px; background-color: transparent;">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 text-black text-center mb-5">About Us</h1>
+        <div class="container-fluid py-5">
+            <div class="row align-items-center">
+                <!-- Profile Picture -->
+                <div class="col-md-4 col-12">
+                    <img src="./its.jpg" alt="Profile Picture" class="img-fluid rounded mb-4" style="width: 100%; max-width: 300px; height: auto; object-fit: cover;"> <!-- Responsive image -->
+                    <p class="h6 text-dark text-start" style="font-weight: 700;">Name: Raja Balaji A</p>
+                    <p class="h6 text-dark text-start" style="font-weight: 700;">Profile: Full Stack Web Developer</p>
+                    <p class="h6 text-dark text-start" style="font-weight: 700;">Email: balaji@gmail.com</p>
+                </div>
+                <!-- About Content -->
+                <div class="col-md-8 col-12" >
+                    <h1 class="display-5 fw-bold text-body-emphasis lh-1 text-black text-start">About Me</h1>
+                    <p class="fs-5 text-dark" style="text-align: justify;">
+                        Hello! I'm a passionate web developer with a strong foundation in both front-end and back-end technologies. I specialize in creating responsive and dynamic web applications using HTML, CSS, and JavaScript, along with Bootstrap for sleek and modern designs. I also have experience with Python and Flask, allowing me to build powerful web applications with efficient back-end functionality. My knowledge of MySQL helps me manage databases effectively, ensuring data integrity and smooth operations. I thrive on challenges and enjoy turning complex problems into elegant solutions. My expertise in media queries enables me to create responsive designs that provide a seamless user experience across all devices. I’m always eager to learn new technologies and improve my skills. Let's connect and bring your ideas to life!
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-start gap-2">
+                        <a href="#contact" class="btn btn-download text-black">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------About Us End------- -->
+    <hr>
+    <!-- ------- Education Start------- -->
+    <section id="education" style="padding: 50px;">
+        <div class="container py-5" id="featured-3">
+            <h2 class="pb-2 text-start">Education</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div class="col p-3 d-flex">
+                    <div class="education p-3 rounded flex-fill">
+                        <i class="fa-solid fa-graduation-cap fs-2 mb-4" style="font-size: 3rem;"></i>
+                        <h3 class="fs-3">BCA (2020-2023)</h3>
+                        <p class="fs-5">Srimath Sivagnana Balaya Swamigal College in Mailam, Tamil Nadu</p>
+                        <p>Passed the examination in 2023.</p>
+                        <p>CGPA: 8.0</p>
+                    </div>
+                </div>
+                <div class="col p-3 d-flex">
+                    <div class="education p-3 rounded flex-fill">
+                        <i class="fa-solid fa-graduation-cap fs-2 mb-4" style="font-size: 3rem;"></i>
+                        <h3 class="fs-3">MCA (2023-2025)</h3>
+                        <p class="fs-5">Takshashila University, Tindivanam Taluk, Ongur, Tamil Nadu</p>
+                        <p>Passed the examination in 2025.</p>
+                        <p>CGPA: 8.6</p>
+                    </div>
+                </div>
+                <!-- Add more education -->
+            </div>
+        </div>
+    </section>
+    <!-- ------- Education End------- -->
+    <hr>
+    <!-- ------- Skills Start------- -->
+    <section id="skills" style="padding: 100px; background-color: transparent;">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 text-black text-center mb-5">My Skills</h1>
+        <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-center">
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-html-logo-icon-download-in-svg-png-gif-file-formats--brand-development-tools-pack-logos-icons-225995.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-css-logo-icon-download-in-svg-png-gif-file-formats--brand-development-tools-pack-logos-icons-226095.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-javascript-logo-icon-download-in-svg-png-gif-file-formats--html-programming-language-coding-logos-icons-1720087.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-bootstrap-logo-icon-download-in-svg-png-gif-file-formats--wordmark-programming-langugae-language-pack-logos-icons-1175203.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-python-logo-icon-download-in-svg-png-gif-file-formats--brand-development-tools-pack-logos-icons-226051.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://flask.palletsprojects.com/en/stable/_images/flask-horizontal.png" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-mysql-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-brand-vol-5-pack-logos-icons-3030165.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>            
+            <div class="skill-icon m-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-512/free-php-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-brand-vol-5-pack-logos-icons-3030200.png?f=webp&w=256" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://static.canva.com/web/images/8439b51bb7a19f6e65ce1064bc37c197.svg" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://git-scm.com/images/logos/2color-lightbg@2x.png" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+            <div class="skill-icon m-4">
+                <img src="https://cloudian.com/wp-content/uploads/2020/05/office365-1.jpg" alt="Flask" class="img-fluid rounded mb-4 skill-image">
+            </div>
+        </div>
+    </section>
+    <!-- -------skills end------- -->
+    <hr>
+    <!-- -------Projects Start------- -->
+    <section id="projects" style="padding: 100px;">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 text-black text-center mb-5">My Projects</h1>
+        <div class="container">
+            <div class="row">
+                <!-- Card 1 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="https://5.imimg.com/data5/SELLER/Default/2023/10/355416189/DM/UD/MI/3497104/responder-student-reporting-management-system-500x500.png" alt="Student Management System" class="card-img">
+                            </div>
+                            <div class="card-back">
+                                <h5 class="card-title">Student Management System</h5>
+                                <p class="card-text" style="text-align: justify;">The Student Portal is a web application for managing student data with features like registration, course enrollment, and grade tracking.</p>
+                                <a class="btn btn-primary" href="https://github.com/KombanTech/Student-Management-System-using-Python-Flask-And-Mysql">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="https://cdn.vectorstock.com/i/500p/42/75/feedback-icon-simple-element-vector-27044275.jpg" alt="Feedback Application" class="card-img">
+                            </div>
+                            <div class="card-back">
+                                <h5 class="card-title">Feedback Application</h5>
+                                <p class="card-text" style="text-align: justify;">The Feedback Application is a web-based tool for collecting and managing user feedback, built with HTML, CSS, JavaScript, Bootstrap, Python Flask, and MySQL.</p>
+                                <a class="btn btn-primary" href="https://github.com/KombanTech/FeedBack-Application-Using-Python-Flask">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="https://www.shutterstock.com/image-illustration/crud-acronym-create-read-update-600nw-2491959959.jpg" alt="CRUD Application" class="card-img">
+                            </div>
+                            <div class="card-back">
+                                <h5 class="card-title">CRUD Application</h5>
+                                <p class="card-text" style="text-align: justify;">The CRUD Application is a web tool for creating, reading, updating, and deleting data, developed using HTML, CSS, JavaScript, Bootstrap, Python Flask, and MySQL.</p>
+                                <a class="btn btn-primary" href="https://github.com/KombanTech/CRUD-Application-Using-Python-Flask">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="https://img.freepik.com/premium-vector/online-banking-icon-flat-sign-element-from-credit-collection-creative-online-banking-icon-web-design-templates-infographics-more_676904-1552.jpg" alt="E-Banking" class="card-img">
+                            </div>
+                            <div class="card-back">
+                                <h5 class="card-title">E-Banking</h5>
+                                <p class="card-text" style="text-align: justify;">The e-Banking application is a web platform for managing financial transactions securely, built with HTML, CSS, JavaScript, Bootstrap, PHP, and MySQL.</p>
+                                <a class="btn btn-primary" href="#">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------Projects End------- -->
+    <hr>
+    <!-- -------certificates Start------- -->
+    <section class="certificates" id="certificates" style="padding: 100px;">
+        <h2 style="text-align: center; font-size: 2.4rem; margin-top: 50px;">My Certificates</h2>
+    
+        <!-- Certificates container to display images -->
+        <div class="certificates-container">
+          <div class="certificates-card">
+            <img src="./python scaler certificate_page-0001.jpg" alt="Certificate10" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./FSW 30days novi tech_page-0001.jpg" alt="Certificate6" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./Nasscom certificate _page-0001.jpg" alt="Certificate8" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./chennai trade center certificate _page-0001.jpg" alt="Certificate5" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./King_official_page-0001.jpg" alt="Certificate7" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./Novi tech bootcamp_page-0001.jpg" alt="Certificate9" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./6G certificate _page-0001.jpg" alt="Certificate1" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./Advanced Cybersecurity _page-0001.jpg" alt="Certificate2" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./Ai & Ml Certificate_page-0001.jpg" alt="Certificate3" onclick="openModal(this.src)" />
+          </div>
+          <div class="certificates-card">
+            <img src="./AWS MAD_page-0001.jpg" alt="Certificate4" onclick="openModal(this.src)" />
+          </div>
+        </div>
+    
+        <!-- Modal for the image preview -->
+        <div id="modal" class="modal" onclick="closeModal()">
+          <span class="close" id="closeBtn">&times;</span>
+          <img class="modal-content" id="modal-img" />
+          <div id="caption"></div>
+        </div>
+      </section>
+    <!-- -------certificates end------- -->
+    <hr>
+    <!-- -------Services Start------- -->
+    <section id="services" style="padding: 100px;">
+        <h1 class="display-5 fw-bold text-black text-center mb-5">Services</h1>
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Service Card 1 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-laptop-code" style="font-size:60px;"></i>
+                            <h5 class="card-title">Custom Web Application Development</h5>
+                            <p class="card-text">Designing and developing tailored web applications using modern front-end technologies and powerful back-end frameworks.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fab fa-connectdevelop" style="font-size:60px;"></i>
+                            <h5 class="card-title">API Integration and Development</h5>
+                            <p class="card-text">Designing and building custom APIs to meet specific business requirements, ensuring seamless integration.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-web-awesome" style="font-size:60px;"></i>
+                            <h5 class="card-title">Responsive Design and User Experience</h5>
+                            <p class="card-text">Crafting responsive and user-centric designs for a consistent experience across all devices.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-database" style="font-size:60px;"></i>
+                            <h5 class="card-title">Database Design and Management</h5>
+                            <p class="card-text">Building and managing databases to handle complex data structures and ensure data integrity.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Card 5 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-bolt" style="font-size:60px;"></i>
+                            <h5 class="card-title">Performance Optimization</h5>
+                            <p class="card-text">Enhancing application performance through code optimization and efficient resource management.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Card 6 -->
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card text-black" style="background-color: #dcf0f1;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shield" style="font-size:60px;"></i>
+                            <h5 class="card-title">Security Best Practices</h5>
+                            <p class="card-text">Implementing robust security measures to protect applications and ensure user data safety.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------Services End------- -->
+     <hr>
+     <!-- -------Contact Us Start------- -->
+    <section id="contact" class="py-5" style="background-color: transparent;">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-center mb-4">Contact Us</h1>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <form action="https://api.web3forms.com/submit" id="contactForm" method="POST" class="p-4 shadow rounded" style="background-color: transparent;">
+                        <div class="form-group">
+                            <input type="hidden" name="access_key" value="e0dad6bc-21f3-4d73-9ba1-eb21d50448ee">
+                            <label for="name">Name</label>
+                            <input type="text" style="background-color: transparent;" class="form-control" id="name" name="name" placeholder="Enter Your Name" required>
+                            <label for="email">Email</label>
+                            <input type="email" style="background-color: transparent;" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+                            <label for="message">Message</label>
+                            <textarea class="form-control" style="background-color: transparent;" id="message" name="message" rows="4" placeholder="Enter Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-download">Send Message</button>
+                        <button type="button" id="resetBtn" class="btn btn-download">Reset</button>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------Contact Us End------- -->
+     <!-- -------Footer Start------- -->
+     <footer class="text-white py-4">
+        <div class="container text-center text-dark">
+            <p>&copy; 2024 Komban Tech. All Rights Reserved.</p>
+            <div class="social-icons">
+                <a href="https://github.com/KombanTech" class="text-black mr-3"><i class="fab fa-github"></i></i></a>
+                <a href="https://www.linkedin.com/in/a-raja-balaji-komban-tech14/" class="text-black mr-3"><i class="fab fa-linkedin-in"></i></a>
+                <!-- <a href="#" class="text-black"><i class="fab fa-instagram"></i></a> -->
+            </div>
+        </div>
+    </footer>
+    
+    <!-- -------Footer End------- -->
+     <script>
+        document.getElementById("resetBtn").addEventListener("click", function() {
+  // Reset the form
+  document.getElementById("contactForm").reset();
+});
+     </script>
+
+    <script>
+        // Function to open the modal and display the image
+        function openModal(src) {
+          var modal = document.getElementById("modal");
+          var modalImg = document.getElementById("modal-img");
+          modal.style.display = "flex"; // To center modal
+          modalImg.src = src;
+        }
+    
+        // Function to close the modal
+        function closeModal() {
+          var modal = document.getElementById("modal");
+          modal.style.display = "none";
+        }
+    
+        // Close modal when clicking on the close button
+        document.getElementById("closeBtn").onclick = function() {
+          closeModal();
+        }
+      </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- -------Backspace based animation Script Start------- -->
+    <script>
+        const roles = ['Web Designer', 'Web Developer', 'Full Stack Developer'];
+        let index = 0;
+
+        function changeText() {
+            const nameElement = document.getElementById('name');
+            const currentRole = roles[index];
+            let currentText = '';
+            let i = 0;
+
+            // Function to add text
+            function addText() {
+                if (i < currentRole.length) {
+                    currentText += currentRole.charAt(i);
+                    nameElement.textContent = `\n${currentText}`;
+                    i++;
+                    setTimeout(addText, 100);
+                } else {
+                    setTimeout(removeText, 2000);
+                }
+            }
+
+            // Function to remove text
+            function removeText() {
+                if (currentText.length > 0) {
+                    currentText = currentText.slice(0, -1);
+                    nameElement.textContent = `\n${currentText}`;
+                    setTimeout(removeText, 100);
+                } else {
+                    index = (index + 1) % roles.length;
+                    setTimeout(changeText, 500);
+                }
+            }
+
+            addText(); // Start adding text
+        }
+
+        window.onload = () => {
+            changeText();
+        };
+    </script>
+    <!-- -------Backspace based animation Script Start------- -->
+    <!-- -------Scroll animation Script Start------- -->
+    <!-- <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script> -->
+    <!-- -------Scroll animation Script End------- -->
+</body>
+</html>
